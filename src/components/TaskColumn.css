@@ -1,0 +1,11 @@
+
+
+.task-column-heading{
+  display: flex;
+  align-items: center;
+}
+
+.task-column-icon{
+  color: #6457f9;
+  margin-right: 9px;
+}
