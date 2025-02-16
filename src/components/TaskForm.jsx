@@ -20,7 +20,27 @@ const TaskForm = () => {
     // properties "name"
     task: "",
     status: "goals",
+    tags: []
   })
+
+  const checkTag = (tag) =>{
+    return taskData.tags.some(item => item === tag)
+  }
+
+  const selectTag = (tag) => {
+    if(taskData.tags.some(item => item === tag)){
+      const filterTags = taskData.tags.filter(item => item != tag)
+      setTaskData(prev => {
+        return {...prev, tags: filterTags}
+      })
+    }else{
+      setTaskData(prev => {
+        return {...prev, tags: [...prev.tags, tag]}
+      })
+    }
+  }
+
+  
 
   const handleChange = (e) =>{
     // const name = e.target.name
@@ -35,8 +55,6 @@ const TaskForm = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-
-    console.log(taskData);
   }
 
   return (
@@ -54,9 +72,9 @@ const TaskForm = () => {
 
         <div className="task-from-bottom-line">
           <div>
-            <Tag tagName="Standar" />
-            <Tag tagName="Penting" />
-            <Tag tagName="Prioritas" />
+            <Tag tagName="Standar" selectTag={selectTag} selected={checkTag("Standar")} />
+            <Tag tagName="Penting" selectTag={selectTag} selected={checkTag("Penting")} />
+            <Tag tagName="Prioritas" selectTag={selectTag} selected={checkTag("Prioritas")} />
           </div>
 
           <div>
