@@ -2,7 +2,7 @@ import React, {useState}from "react";
 import "./TaskForm.css";
 import Tag from "./Tag";
 
-const TaskForm = () => {
+const TaskForm = ({ setTasks }) => {
   // const [task, setTask] = useState("")
   // const [status, setStatus] = useState("Goals")
 
@@ -27,6 +27,8 @@ const TaskForm = () => {
     return taskData.tags.some(item => item === tag)
   }
 
+
+
   const selectTag = (tag) => {
     if(taskData.tags.some(item => item === tag)){
       const filterTags = taskData.tags.filter(item => item != tag)
@@ -40,7 +42,6 @@ const TaskForm = () => {
     }
   }
 
-  
 
   const handleChange = (e) =>{
     // const name = e.target.name
@@ -55,6 +56,16 @@ const TaskForm = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
+    setTasks(prev =>  {
+      return [...prev, taskData]
+    } )
+
+    // reset tags when submit new card
+    setTaskData({
+      task: "",
+      status: "goals",
+      tags: []
+    })
   }
 
   return (
@@ -65,6 +76,7 @@ const TaskForm = () => {
         className="task-input" 
         type="text" 
         name="task" 
+        value={taskData.task}
         id="task-input" 
         placeholder="Ketik Resolusi mu disini!"
         onChange={handleChange}
@@ -80,6 +92,7 @@ const TaskForm = () => {
           <div>
             <select 
             className="task-status" 
+            value={taskData.status}
             name="status" 
             id="task-status"
             onChange={handleChange}

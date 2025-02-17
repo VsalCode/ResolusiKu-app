@@ -4,12 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullseye, faClipboardCheck, faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
 import TaskCard from "./TaskCard";
 
-const TaskColumn = ({ title }) => { 
-
+const TaskColumn = ({ title, tasks, status }) => {
   const iconMap = {
-    "Goals": faBullseye,
+    Goals: faBullseye,
     "On Progress": faHourglassHalf,
-    "Completed": faClipboardCheck
+    Completed: faClipboardCheck,
   };
 
   return (
@@ -18,7 +17,7 @@ const TaskColumn = ({ title }) => {
         <FontAwesomeIcon className="task-column-icon" icon={iconMap[title]} /> {title}
       </h2>
 
-      <TaskCard />
+      {tasks.map((task, index) => task.status === status && <TaskCard key={index} title={task.task} tags={task.tags} />)}
     </section>
   );
 };

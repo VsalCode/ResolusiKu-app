@@ -4,16 +4,16 @@ import Tag from "./Tag.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TaskCard = () => {
+const TaskCard = ({title, tags}) => {
   return (
     <article className="task-card">
-      <p className="task-text">Lorem ipsum dolor sit amet.</p>
+      <p className="task-text">{title}</p>
 
       <div className="task-card-bottom-line">
-        <div className="task-card-text">
-          <Tag tagName="Standar" />
-          <Tag tagName="Penting" />
-          <Tag tagName="Prioritas" />
+        <div className="task-card-tags">
+          {tags.map((tag, index) => (
+            <Tag key={index} tagName={tag} selected={true} />
+          ))}
         </div>
 
         <div className="task-delete">
