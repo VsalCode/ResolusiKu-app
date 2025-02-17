@@ -63,7 +63,7 @@ const TaskForm = ({ setTasks }) => {
     // reset tags when submit new card
     setTaskData({
       task: "",
-      status: "goals",
+      status: "Goals",
       tags: []
     })
   }
